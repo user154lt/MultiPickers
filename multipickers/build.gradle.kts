@@ -1,16 +1,47 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id ("maven-publish")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.plugin.compose)
+    alias(libs.plugins.jetbrains.compose)
+    id("maven-publish")
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_1_8)
+        }
+        publishLibraryVariants("release")
+    }
+    jvm("desktop")
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    applyDefaultHierarchyTemplate()
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.ui)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.runtime)
+            }
+        }
+    }
+
+}
+
+tasks.withType<Jar>() {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 android {
     namespace = "github.returdev.multipickers"
     compileSdk = 34
-
-    tasks.withType<Jar>(){
-        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    }
 
     defaultConfig {
         minSdk = 26
@@ -32,9 +63,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 
     buildFeatures {
         compose = true
@@ -43,8 +71,8 @@ android {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
 
-    publishing{
-        singleVariant("release"){
+    publishing {
+        singleVariant("release") {
             withSourcesJar()
             withJavadocJar()
         }
@@ -52,17 +80,10 @@ android {
 
 }
 
-dependencies {
-
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation ("androidx.compose.material3:material3")
-
-}
-
-publishing{
-    publications{
-        register<MavenPublication>("release"){
-            afterEvaluate{
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.returdev"
                 artifactId = "multipickers"
