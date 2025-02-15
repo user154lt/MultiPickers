@@ -5,15 +5,14 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.compose)
     alias(libs.plugins.jetbrains.compose)
-    id("maven-publish")
+    alias(libs.plugins.vanniktech.maven.publish)
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_1_8)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
-        publishLibraryVariants("release")
     }
     jvm("desktop")
     iosX64()
@@ -33,10 +32,6 @@ kotlin {
         }
     }
 
-}
-
-tasks.withType<Jar>() {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 android {
@@ -60,49 +55,22 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-
-}
-
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            afterEvaluate {
-                from(components["release"])
-                groupId = "com.github.returdev"
-                artifactId = "multipickers"
-                version = "1.0.1"
-            }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
 }
-//afterEvaluate{
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from(components["release"])
-//                groupId = "com.github.returdev"
-//                artifactId = "multipickers"
-//                version = "1.0.1"
-//
-//            }
-//
-//        }
-//    }
-//}
+
+
+mavenPublishing {
+    coordinates(
+        groupId = "com.github.returdev",
+        artifactId = "multipickers",
+        version = "1.0.1"
+    )
+}
+

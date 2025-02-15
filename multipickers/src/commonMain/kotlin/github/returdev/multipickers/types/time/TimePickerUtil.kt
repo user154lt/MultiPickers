@@ -9,7 +9,9 @@ internal object TimePickerUtil {
      * The format used to convert the hours, seconds, and minutes to strings.
      * It ensures that the values are always represented with two digits.
      */
-    private const val TIME_STRING_FORMAT = "%02d"
+    private fun Int.timeString() =
+        if(this < 10) "0$this" else "$this"
+
 
     /**
      * The range of possible hours for the TimePicker.
@@ -24,11 +26,11 @@ internal object TimePickerUtil {
     /**
      * The string representations of the hours range.
      */
-    val hourStringRange = hoursRange.map { TIME_STRING_FORMAT.format(it) }
+    val hourStringRange = hoursRange.map { it.timeString() }
 
     /**
      * The string representations of the seconds and minutes range.
      */
-    val secondsAndMinutesStringRange = secondsAndMinutesRange.map { TIME_STRING_FORMAT.format(it) }
+    val secondsAndMinutesStringRange = secondsAndMinutesRange.map { it.timeString() }
 
 }

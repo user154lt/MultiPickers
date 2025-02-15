@@ -1,8 +1,9 @@
 [versions]
 
-agp = "8.2.2"
+agp = "8.5.2"
 kotlin = "2.1.0"
 compose = "1.7.3"
+maven-publish = "0.30.0"
 
 [plugins]
 
@@ -11,5 +12,6 @@ android-application = { id = "com.android.application", version.ref = "agp"}
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 kotlin-plugin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+vanniktech-maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
 
 [libraries]
