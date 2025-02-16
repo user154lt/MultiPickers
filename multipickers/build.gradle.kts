@@ -68,9 +68,40 @@ android {
 
 mavenPublishing {
     coordinates(
-        groupId = "com.github.returdev",
+        groupId = "io.github.user154lt",
         artifactId = "multipickers",
         version = "1.0.1"
     )
+    pom {
+        name.set("Compose multiplatform multipicker library")
+        description.set(
+            "A Jetpack Compose Multiplatform Library that features a collection of easily " +
+                    "implementable pickers, can be used for Android, desktop and iOS targets"
+        )
+        inceptionYear.set("2025")
+        url.set("https://github.com/user154lt/MultiPickers")
+        licenses {
+            license {
+                name.set("Apache")
+                url.set("https://www.apache.org/licenses/LICENSE-2.0")
+            }
+        }
+        developers {
+            developer {
+                id.set("User154lt")
+                name.set("User154")
+                url = "https://github.com/user154lt/"
+            }
+            developer {
+                id.set("ReturDev")
+                name.set("Sergio")
+                url = "https://github.com/ReturDev"
+            }
+        }
+        scm{
+            url.set("https://github.com/user154lt/MultiPickers")
+        }
+    }
 }
+
 
