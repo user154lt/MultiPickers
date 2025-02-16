@@ -2,8 +2,6 @@
   <a href="" target="_blank">
     <img alt="Multipickers-Banner" src="https://github.com/ReturDev/ReTurDev/assets/79228896/8a662f94-4814-4584-9e93-9ae1c1961bc1" width="600"/>
   </a>
-  
-  [![Release](https://img.shields.io/badge/Release-v1.0.0-%231afc05?style=flat)](https://jitpack.io/#ReturDev/MultiPickers)
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
   [![API](https://img.shields.io/badge/API-26%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=26)
   
@@ -12,7 +10,7 @@
 ---
 
   **The Multipicker library features a collection of easily implementable composable pickers.**
-  
+
   Current pickers:
   
   - **TextPicker**
@@ -23,24 +21,37 @@
 
 ## Setup :wrench:
 
-### Gradle KTS
-- Add it in root build.gradle
+### Version catalog
+
+If you're using a version catalog then add the following to your `libs.versions.toml` file:
+
+```toml
+[versions]
+#...
+multipickers = "1.0.1"
+
+[libraries]
+#...
+multipickers = { module = "io.github.user154lt:multipickers", version.ref = "multipickers" }
 ```
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven {url = uri("https://jitpack.io")}
-    }
+
+Then add the following to your module level `build.gradle.kts` dependencies block
+
+```gradle
+dependencies {
+    implementation(libs.multipickers)
+}  
+```
+
+### Gradle
+
+Alternatively you can add the following to your module level `build.gradle.kts` dependencies block
+
+```gradle
+dependencies {
+    implementation("io.github.user154lt:multipickers:1.0.1")
 }
 ```
-- Add the dependency
-
-```
-  implementation ("com.github.returdev:multipickers:$version")
-```
-</br>
 
 ## Examples :eyes:
 
