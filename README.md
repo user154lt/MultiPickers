@@ -7,7 +7,7 @@
 
 ---
 
-  **The Multipicker library features a collection of easily implementable composable pickers.**
+  **Compose Multiplatform library that features a collection of easy to implement wheel pickers.**
 
   Current pickers:
   
